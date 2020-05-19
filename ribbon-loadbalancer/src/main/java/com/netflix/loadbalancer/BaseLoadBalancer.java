@@ -1,20 +1,3 @@
-/*
- *
- * Copyright 2013 Netflix, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 package com.netflix.loadbalancer;
 
 import static java.util.Collections.singleton;
@@ -48,6 +31,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * 负载均衡器的基本实现，可以将任意服务器列表设置为服务器池。可以设置ping来确定服务器的活跃程度。
+ * 在内部，这个类维护一个“所有”服务器列表和一个“up”服务器列表，并根据调用者的要求使用它们
  * A basic implementation of the load balancer where an arbitrary list of
  * servers can be set as the server pool. A ping can be set to determine the
  * liveness of a server. Internally, this class maintains an "all" server list

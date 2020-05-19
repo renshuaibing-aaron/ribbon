@@ -1,20 +1,3 @@
-/*
-*
-* Copyright 2013 Netflix, Inc.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
 package com.netflix.loadbalancer;
 
 import java.util.List;
@@ -31,6 +14,7 @@ import java.util.List;
 public interface ILoadBalancer {
 
 	/**
+	 * // 初始化服务列表
 	 * Initial list of servers.
 	 * This API also serves to add additional ones at a later time
 	 * The same logical server (host:port) could essentially be added multiple times
@@ -41,6 +25,7 @@ public interface ILoadBalancer {
 	public void addServers(List<Server> newServers);
 	
 	/**
+	 * // 从列表中选择一个服务
 	 * Choose a server from load balancer.
 	 * 
 	 * @param key An object that the load balancer may use to determine which server to return. null if 
@@ -50,6 +35,7 @@ public interface ILoadBalancer {
 	public Server chooseServer(Object key);
 	
 	/**
+	 * // 标记服务为down
 	 * To be called by the clients of the load balancer to notify that a Server is down
 	 * else, the LB will think its still Alive until the next Ping cycle - potentially
 	 * (assuming that the LB Impl does a ping)
@@ -59,6 +45,7 @@ public interface ILoadBalancer {
 	public void markServerDown(Server server);
 	
 	/**
+	 * // 获取up和reachable的服务
 	 * @deprecated 2016-01-20 This method is deprecated in favor of the
 	 * cleaner {@link #getReachableServers} (equivalent to availableOnly=true)
 	 * and {@link #getAllServers} API (equivalent to availableOnly=false).
@@ -76,6 +63,7 @@ public interface ILoadBalancer {
     public List<Server> getReachableServers();
 
     /**
+	 * 获取所有服务（reachable and unreachable）
      * @return All known servers, both reachable and unreachable.
      */
 	public List<Server> getAllServers();
